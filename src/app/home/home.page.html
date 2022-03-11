@@ -1,0 +1,44 @@
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>Produto:</ion-col>
+      <ion-col>R$:</ion-col>
+      <ion-col>Quantidade:</ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let produto of produtos" class="ion-align-items-center" >
+      <ion-col>{{ produto.nome }}</ion-col>
+      <ion-col class="ion-text-right">R$ {{ produto.preco.toFixed(2).replace('.', ',') }} </ion-col>
+      <ion-col class="ion-text-right" >{{ produto.qtcomprados }}x</ion-col>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="subTrairProduto(produto)" [disabled]="produto.qtcomprados === 0" color="danger">
+            <ion-icon name="remove"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <ion-col>
+          <ion-button (click)="adicionarProduto(produto)" >
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" (click)="calcular()">
+          Somar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        {{ total }}
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
