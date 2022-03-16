@@ -27,6 +27,18 @@ export class HomePage {
   }
 
   calcular() {
-    this.total = 'R$ '+this.produtos.reduce((a,b) => a += b.preco * b.qtcomprados, 0).toFixed(2).replace('.', '.');
+    this.total = 'Total: R$ '+this.produtos.reduce((a,b) => a += b.preco * b.qtcomprados, 0).toFixed(2).replace('.', '.');
+  }
+
+  apagar() {
+    this.total = '';
+    this.produtos = this.produtos.map(produto => {
+      produto.qtcomprados = 0;
+      return produto;
+    });
+  }
+
+  preco(produto) {
+    return produto.preco.toFixed(2).replace('.', ',');
   }
 }

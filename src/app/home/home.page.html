@@ -1,38 +1,49 @@
 <ion-content [fullscreen]="true">
+
+  <ion-header [translucent]="true" >
+    <ion-toolbar >
+      <ion-title>Cantina</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
   <ion-grid>
+    <ion-row class="ion-justify-content-end">
+
+      <ion-fab-button size="small" color="danger" (click)="apagar()" >
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+
+    </ion-row>
     <ion-row>
       <ion-col>Produto:</ion-col>
       <ion-col>R$:</ion-col>
       <ion-col>Quantidade:</ion-col>
-      <ion-col></ion-col>
     </ion-row>
 
     <ion-row *ngFor="let produto of produtos" class="ion-align-items-center" >
       <ion-col>{{ produto.nome }}</ion-col>
-      <ion-col class="ion-text-right">R$ {{ produto.preco.toFixed(2).replace('.', ',') }} </ion-col>
-      <ion-col class="ion-text-right" >{{ produto.qtcomprados }}x</ion-col>
-      <ion-row>
+      <ion-col class="ion-text-right">R$ {{ preco(produto) }} </ion-col>
+
+      <ion-row class="ion-align-items-center">
         <ion-col>
-          <ion-button (click)="subTrairProduto(produto)" [disabled]="produto.qtcomprados === 0" color="danger">
+          <ion-fab-button size="small" (click)="subTrairProduto(produto)" [disabled]="produto.qtcomprados === 0" color="danger">
             <ion-icon name="remove"></ion-icon>
-          </ion-button>
+          </ion-fab-button>
         </ion-col>
 
+        <ion-col class="ion-text-right" >{{ produto.qtcomprados }}x</ion-col>
+
         <ion-col>
-          <ion-button (click)="adicionarProduto(produto)" >
+          <ion-fab-button size="small" (click)="adicionarProduto(produto)" >
             <ion-icon name="add"></ion-icon>
-          </ion-button>
+          </ion-fab-button>
         </ion-col>
       </ion-row>
     </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-button expand="full" (click)="calcular()">
-          Somar
-        </ion-button>
-      </ion-col>
-    </ion-row>
+    <ion-button expand="full" (click)="calcular()" color="success">
+      Somar
+    </ion-button>
 
     <ion-row>
       <ion-col class="ion-text-center">
@@ -41,4 +52,5 @@
     </ion-row>
 
   </ion-grid>
+
 </ion-content>
