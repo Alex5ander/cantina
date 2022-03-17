@@ -1,19 +1,18 @@
+<ion-header [translucent]="true" >
+  <ion-toolbar >
+    <ion-title>Cantina</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
 
-  <ion-header [translucent]="true" >
-    <ion-toolbar >
-      <ion-title>Cantina</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-fab slot="fixed" horizontal="start" vertical="bottom">
+    <ion-fab-button size="small" color="danger" (click)="apagar()" [disabled]="temAlgoNaLista()" >
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <ion-grid>
-    <ion-row class="ion-justify-content-end">
-
-      <ion-fab-button size="small" color="danger" (click)="apagar()" >
-        <ion-icon name="trash"></ion-icon>
-      </ion-fab-button>
-
-    </ion-row>
     <ion-row>
       <ion-col>Produto:</ion-col>
       <ion-col>R$:</ion-col>
@@ -25,25 +24,19 @@
       <ion-col class="ion-text-right">R$ {{ preco(produto) }} </ion-col>
 
       <ion-row class="ion-align-items-center">
-        <ion-col>
-          <ion-fab-button size="small" (click)="subTrairProduto(produto)" [disabled]="produto.qtcomprados === 0" color="danger">
-            <ion-icon name="remove"></ion-icon>
-          </ion-fab-button>
-        </ion-col>
 
-        <ion-col class="ion-text-right" >{{ produto.qtcomprados }}x</ion-col>
+        <ion-fab-button size="small" (click)="subTrairProduto(produto)" [disabled]="produto.qtcomprados === 0" color="danger">
+          <ion-icon name="remove"></ion-icon>
+        </ion-fab-button>
 
-        <ion-col>
-          <ion-fab-button size="small" (click)="adicionarProduto(produto)" >
-            <ion-icon name="add"></ion-icon>
-          </ion-fab-button>
-        </ion-col>
+        {{ produto.qtcomprados }}x
+
+        <ion-fab-button size="small" (click)="adicionarProduto(produto)" >
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+
       </ion-row>
     </ion-row>
-
-    <ion-button expand="full" (click)="calcular()" color="success">
-      Somar
-    </ion-button>
 
     <ion-row>
       <ion-col class="ion-text-center">
@@ -52,5 +45,11 @@
     </ion-row>
 
   </ion-grid>
+
+  <ion-fab  slot="fixed" horizontal="center" vertical="bottom" >
+    <ion-button expand="block" (click)="calcular()" color="success" [disabled]="temAlgoNaLista()">
+      Somar
+    </ion-button>
+  </ion-fab>
 
 </ion-content>

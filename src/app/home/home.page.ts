@@ -1,3 +1,4 @@
+import { ModalController } from '@ionic/angular';
 import { Component } from '@angular/core';
 
 @Component({
@@ -16,7 +17,7 @@ export class HomePage {
 
   total = '';
 
-  constructor() {}
+  constructor(public modalControl: ModalController) {}
 
   subTrairProduto(produto) {
     this.produtos[produto.id].qtcomprados -= 1;
@@ -27,7 +28,21 @@ export class HomePage {
   }
 
   calcular() {
-    this.total = 'Total: R$ '+this.produtos.reduce((a,b) => a += b.preco * b.qtcomprados, 0).toFixed(2).replace('.', '.');
+    this.total = 'Total: R$ '+this.produtos.reduce((a,b) => a += b.preco * b.qtcomprados, 0).toFixed(2).replace('.', ',');
+  }
+
+  temAlgoNaLista() {
+    return this.produtos.every(produto => produto.qtcomprados === 0);
+  }
+
+  async abrirModalApagar() {
+    // this.modal = this.modalControl.create({
+    //   component:
+    // });
+  }
+
+  fecharModalApagar() {
+    // this.modalControl.dismiss();
   }
 
   apagar() {
@@ -36,6 +51,8 @@ export class HomePage {
       produto.qtcomprados = 0;
       return produto;
     });
+
+    this.fecharModalApagar();
   }
 
   preco(produto) {
